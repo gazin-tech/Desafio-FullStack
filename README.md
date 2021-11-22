@@ -51,11 +51,12 @@ TAG | STATUS CODE | ITEM
 [2] | 501 | Impedir que um nível seja removido quando houver um (ou mais) desenvolvedor(es) associado a este
 [2] | 200 ou 404 | Adicionar funcionalidade de busca via query string para a listagem de níveis
 [2] | 200 ou 404 | Adicionar funcionalidade de busca via query string para a listagem de desenvolvedores
+[2] | - | Tratamento de Exceções / Retornos erros concisos
 [2] | - | Adicionar paginação na listagem de níveis
 [2] | - | Adicionar paginação na listagem de desenvolvedores
-[2] | - | Adicionar retorno visual às mensagens de sucesso e/ou erros (Toast Notification)
+[2] | - | Adicionar retorno visual às mensagens de sucesso e/ou erros (Ex. Toast Notification)
 [2] | - | Adicionar retorno visual para confirmação da remoção dos itens do crud
-[2] | - | Permitir a ordenação dos campos, selecionando o "título" (via thead) da tabela de listagem em forma crescente/decrescente
+[2] | - | Permitir a ordenação dos campos, selecionando o "título" da tabela de listagem em forma crescente/decrescente
 [2] | - | Validações de campos dos formulários
 [2] | - | Exibir na listagem de níveis a quantidade de desenvolvedores associados a ele (nível) numa nova coluna
 
@@ -71,7 +72,7 @@ TAG | ITEM
 [3] |  Reaproveitamento de código
 [3] |  Clean Code
 [3] |  Clean Architecture
-[3] |  Testes Unitários
+[3] |  Testes Unitários / Feature
 [3] |  Documentação de código/endpoint
 
 
