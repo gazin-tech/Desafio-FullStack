@@ -1,96 +1,91 @@
-# Desafio-FullStack
-Este é o escopo do projeto base para o teste de avaliação para o ingresso de novos desenvolvedores junto a **Gazin**\<Tech>
+# Projeto de Cadastro de Desenvolvedores 🚀
 
-Esse desafio é composto de algumas etapas. O intuito não é de forma alguma que se tenha que implementa-lo completamente para qualquer consideração de contratação.
+Este projeto consiste em uma aplicação para cadastro de desenvolvedores associados a diferentes níveis. A aplicação é composta por um backend que oferece uma API RESTful e um frontend que é uma SPA (Single Page Application) interligada à API.
 
-O projeto consiste em uma aplicação onde o candidato deverá desenvolver uma aplicação na *linguagem que desejar*, criando um Backend e um Frontend  que deverão estar interligados através de uma API REST JSON.
-  
-O propósito do teste é analisar boas práticas, lógica de programação, reaproveitamento de código e conhecimento geral das tecnologias escolhidas e utilizadas.
+## Estrutura do Projeto 📂
 
-*Dica 1*: Fique tranquilo e tente resolvê-lo como se estivesse estudando algo novo que queira aprender.
-*Dica 2*: Capriche no README do seu projeto! Seja especifico e aponte o que você julgar importante que nós saibamos para conseguir executa-lo de forma correta.
+- **backend**: Contém o código relacionado ao servidor e à API RESTful.
+- **frontend**: Contém o código da interface do usuário.
 
-Crie um repositório público em algum serviço de hospedagem como GitHub, GitLab, BitBucket, para armazenar seu código. Você o enviará para nós, para a avaliação do código.
+## Dependências 📦
 
-O objetivo desse desafio é compreender quais conhecimentos você já possui e sua desenvoltura diante a problemas ou tarefas que esteja se deparando pela primeira vez. Imagine que o resultado do seu trabalho será um projeto público que será utilizado por várias pessoas. Sendo assim, aplique neste projeto as boas práticas de desenvolvimento de software que você conhece.
+## Backend
 
-## O Backend
-Você deverá desenvolver uma API RESTful que utilize os métodos (​GET​, ​POST​, ​PUT/PATCH​ e ​DELETE​).
+Desenvolva uma API RESTful com os métodos GET, POST, PUT/PATCH e DELETE.
 
-## O Frontend
-Você deverá desenvolver uma interface da forma que achar melhor, aplicando técnicas de UI/UX a seu critério. Porém, esta interface deverá ser uma SPA (Single Page Application) e atender o consumo de todos endpoints da API do backend.
+## Frontend
 
-## Itens a serem entregues no projeto
-* Os itens marcados com a tag [1] são os itens que cobrem o __mínimo viável do teste para que possamos avaliar o desempenho do candidato__;
-* Os itens marcados com a tag [2] __são itens opcionais__, mas que poderão demonstrar o nível de conhecimento do candidato sobre a stack escolhida para realizar o teste;
-* Os itens marcados com a tag [3] __são itens opcionais__, mas que poderão demonstrar o nível de conhecimento do candidato sobre a estruturação do projeto;
-* Os itens marcados com a tag [4] __são itens opcionais__, mas que poderão demonstrar o nível de conhecimento do candidato sobre a construção do projeto (orquestração da aplicação);
+Crie uma SPA (Single Page Application) com uma interface intuitiva, aplicando técnicas de UI/UX.
 
-## O projeto
-O projeto consiste em criar um sistema de cadastro de Desenvolvedores, que deverá obrigatóriamente, estar associado a um determinado nível. 
+## Configuração do Ambiente ⚙️
 
-O candidato deverá criar então **2 CRUDs completos**, sendo:
+Certifique-se de ter as versões adequadas do Node.js e outras ferramentas necessárias instaladas em seu ambiente de desenvolvimento.
 
-* CRUD de níveis
-* CRUD dos desenvolvedores
+## Endpoints da API 🚚
 
-Ambos os CRUDs deverão possuir todos os métodos REST citados no item [O backend](https://github.com/dmsysop/gazin-potencial-crud/blob/main/README.md#o-backend)
+- **Listar Níveis (GET):** `/api/niveis`
+  - **Resposta de Sucesso (200):** Retorna a lista de níveis existentes.
+  - **Resposta de Erro (404):** Retorna se não houver nenhum nível cadastrado.
 
-1. Os itens a serem desenvolvidos nesta etapa do projeto são para avaliação de domínio de stack escolhida:
+- **Cadastrar Nível (POST):** `/api/niveis`
+  - **Corpo da Requisição:** `{ "nivel": "Nome do Nível" }`
+  - **Resposta de Sucesso (201):** Retorna o novo nível criado.
+  - **Resposta de Erro (400):** Retorna se o corpo da requisição estiver incorreto.
 
-TAG | STATUS CODE | ITEM
---- | ----------- | ------------
-[1] | 200 | Listar níveis existentes
-[1] | 201 ou 400 | Cadastrar um nível
-[1] | 200 ou 400 | Editar um nível
-[1] | 204 ou 400 | Remover um nível
-[1] | 200 | Listar desenvolvedores existentes
-[1] | 201 ou 400 | Cadastrar um desenvolvedor
-[1] | 200 ou 400 | Editar um desenvolvedor
-[1] | 204 ou 400 | Remover um desenvolvedor
-[2] | 501 | Impedir que um nível seja removido quando houver um (ou mais) desenvolvedor(es) associado a este
-[2] | 200 ou 404 | Adicionar funcionalidade de busca via query string para a listagem de níveis
-[2] | 200 ou 404 | Adicionar funcionalidade de busca via query string para a listagem de desenvolvedores
-[2] | - | Tratamento de Exceções / Retornos erros concisos
-[2] | - | Adicionar paginação na listagem de níveis
-[2] | - | Adicionar paginação na listagem de desenvolvedores
-[2] | - | Adicionar retorno visual às mensagens de sucesso e/ou erros (Ex. Toast Notification)
-[2] | - | Adicionar retorno visual para confirmação da remoção dos itens do crud
-[2] | - | Permitir a ordenação dos campos, selecionando o "título" da tabela de listagem em forma crescente/decrescente
-[2] | - | Validações de campos dos formulários
-[2] | - | Exibir na listagem de níveis a quantidade de desenvolvedores associados a ele (nível) numa nova coluna
+- **Editar Nível (PUT/PATCH):** `/api/niveis/:id`
+  - **Corpo da Requisição:** `{ "nivel": "Novo Nome do Nível" }`
+  - **Resposta de Sucesso (200):** Retorna o nível editado.
+  - **Resposta de Erro (400):** Retorna se o corpo da requisição estiver incorreto.
 
+- **Remover Nível (DELETE):** `/api/niveis/:id`
+  - **Resposta de Sucesso (204):** Retorna se o nível foi removido com sucesso.
+  - **Resposta de Erro (400):** Retorna se houver desenvolvedores associados ao nível.
 
-2. Os itens a serem desenvolvidos nesta etapa do projeto são para avaliação de conhecimento técnico e estruturação e organização de código:
-> Lembramos que os itens abaixo são __opcionais__
+- **Listar Desenvolvedores (GET):** `/api/desenvolvedores`
+  - **Resposta de Sucesso (200):** Retorna a lista de desenvolvedores existentes.
+  - **Resposta de Erro (404):** Retorna se não houver nenhum desenvolvedor cadastrado.
 
-TAG | ITEM
---- | ------------
-[3] |  Tipagem de dados
-[3] |  Organização e estrutura de pastas
-[3] |  Conceitos e boas práticas de programação
-[3] |  Reaproveitamento de código
-[3] |  Clean Code
-[3] |  Clean Architecture
-[3] |  Testes Unitários / Feature
-[3] |  Documentação de código/endpoint
+- **Cadastrar Desenvolvedor (POST):** `/api/desenvolvedores`
+  - **Corpo da Requisição:**
 
+  ```json
+  {
+      "nivelId": 1,
+      "nome": "Nome do Desenvolvedor",
+      "sexo": "M",
+      "datanascimento": "1990-01-01",
+      "hobby": "Programação"
+  }
+   ```
 
-3. Os itens a serem desenvolvidos nesta etapa do projeto são para avaliação de conhecimento técnico e orquestração de projetos:
-> Lembramos que os itens abaixo são __opcionais__
+  - **Resposta de Sucesso (201):** Retorna o novo desenvolvedor criado.
+  - **Resposta de Erro (400):** Retorna se o corpo da requisição estiver incorreto.
 
-TAG | ITEM
---- | ------------
-[4] | Disponibilização do backend via Docker
-[4] | Disponibilização do frontend via Docker
-[4] | Disponibilização dos containers (backend+frontend) via Docker Compose
-[4] | Disponibilização/Publicação do sistema em uma aplicação online (Ex. Heroku)
+- **Editar Desenvolvedor (PUT/PATCH):** `/api/desenvolvedores/:id`
+  - **Corpo da Requisição:**
 
+   ```json
+   {
+      "nome": "Novo Nome do Desenvolvedor",
+      "hobby": "Violão",
+      "nivelId": 2,
+      "sexo": "F",
+      "datanascimento": "1990-01-01"
+  }
+   ```
+
+  - **Resposta de Sucesso (200):** Retorna o desenvolvedor editado.
+  - **Resposta de Erro (400):** Retorna se o corpo da requisição estiver incorreto.
+
+- **Remover Desenvolvedor (DELETE):** `/api/desenvolvedores/:id`
+  - **Resposta de Sucesso (204):** Retorna se o desenvolvedor foi removido com sucesso.
+  - **Resposta de Erro (400):** Retorna se houver problemas na remoção.
 
 ## Sugestões de Desenvolvimento
 
-#### Estrutura da base de desenvolvedores:
-```
+### Estrutura da base de desenvolvedores
+
+```plaintext
 id: integer
 nivel: fk
 nome: varchar
@@ -100,13 +95,29 @@ idade: integer
 hobby: varchar
 ```
 
-#### Estrutura da base de níveis:
-```
+## Estrutura da base de níveis
+
+```plaintext
 id: integer
 nivel: varchar
 ```
 
-# O que será avaliado?
+### Orquestração de Projetos
+
+- Disponibilização do backend via Docker 🐳
+- Disponibilização do frontend via Docker 🎨 🐳
+- Disponibilização dos containers (backend + frontend) via Docker Compose 🐳
+- Disponibilização/Publicação do sistema online 🌐
+
+## Opcionais 📝
+
+- Utilize tipagem de dados apropriada para garantir consistência nos dados.
+- Mantenha um código limpo e bem estruturado, seguindo os princípios de Clean Code e Clean Architecture.
+- Adicione testes unitários para partes críticas do código.
+- Considere adicionar capturas de tela ou GIFs animados para demonstrar visualmente a interface do usuário.
+
+## O que será avaliado? 🔎
+
 Em geral, tudo! Porém, nosso foco aqui é descobrir como você aplica conceitos básicos da programação no seu dia a dia para solucionar e resolver problemas e principalmente, entregar valor ao produto!
 
 Os mais importante aqui são:
@@ -117,8 +128,8 @@ Os mais importante aqui são:
 - Como você resolveu os problemas
 - Sua forma de escrever o código
 
+## Entrega 📄
 
-# Entrega
-Faça seu teste com calma! Organize-se! E após finalizado envie-nos por e-mail o link do projeto no github, com as devidas explicações no README do seu projeto.
+Faça seu teste com calma! Organize-se! E após finalizado envie-nos por e-mail o link do projeto no github, com as devidas explicações no **README.md** do seu projeto.
 
 Desejamos uma boa sorte e agradecemos o interesse em participar de nosso processo de obtenção de talentos!
