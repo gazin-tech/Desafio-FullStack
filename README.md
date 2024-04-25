@@ -4,36 +4,95 @@ Este projeto consiste em uma aplicação para cadastro de desenvolvedores associ
 
 ## Estrutura do Projeto 📂
 
-- **backend**: Contém o código relacionado ao servidor e à API RESTful.
-- **frontend**: Contém o código da interface do usuário.
+Sugerimos a seguinte estrutura de pasta inicial para o projeto:
 
-## Dependências 📦
+```
+- 📂sua-pasta
+  - 📂backend
+    - 🐳 Dockerfile
+  - 📂frontend
+    - 🐳 Dockerfile
+  🐳 docker-compose.yml
+```
 
-## Backend
+### **Legenda:**
+
+- 📂**sua-pasta**: Pasta raiz do projeto.
+- 📂**backend**: Contém o código relacionado ao servidor e à API RESTful.
+- 📂**frontend**: Contém o código da interface do usuário.
+- 🐳**docker-compose.yml**: Arquivo de configuração do Docker Compose para orquestração dos containers.
+
+> ⚠️ **Obs:** Crie apenas um único repositório que contenha front + backend.
+
+## Banco de dados 📦
+
+### Estrutura da base de desenvolvedores
+
+```
+id: integer
+nivel_id: fk (niveis)
+nome: varchar
+sexo: char
+data_nascimento: date
+idade: integer
+hobby: varchar
+```
+
+### Estrutura da base de níveis
+
+```
+id: integer
+nivel: varchar
+```
+
+# **Backend** 🚀
 
 Desenvolva uma API RESTful com os métodos GET, POST, PUT/PATCH e DELETE.
 
-## Frontend
-
-Crie uma SPA (Single Page Application) com uma interface intuitiva, aplicando técnicas de UI/UX.
-
-## Configuração do Ambiente ⚙️
-
-Certifique-se de ter as versões adequadas do Node.js e outras ferramentas necessárias instaladas em seu ambiente de desenvolvimento.
-
 ## Endpoints da API 🚚
 
+Abaixo está como esperamos que sejam os endpoints da api.
+
+> ⚠️ **Obs:** Fique atento aos requisitos adicionais ao final do documento.
+
+### **Níveis**
+
 - **Listar Níveis (GET):** `/api/niveis`
+
   - **Resposta de Sucesso (200):** Retorna a lista de níveis existentes.
+
+  ```json
+  {
+    "id": 1,
+    "nivel": "Nome do Nível"
+  }
+  ```
+
   - **Resposta de Erro (404):** Retorna se não houver nenhum nível cadastrado.
 
 - **Cadastrar Nível (POST):** `/api/niveis`
-  - **Corpo da Requisição:** `{ "nivel": "Nome do Nível" }`
+
+  - **Corpo da Requisição:**
+
+  ```json
+  {
+    "nivel": "Nome do Nível"
+  }
+  ```
+
   - **Resposta de Sucesso (201):** Retorna o novo nível criado.
   - **Resposta de Erro (400):** Retorna se o corpo da requisição estiver incorreto.
 
 - **Editar Nível (PUT/PATCH):** `/api/niveis/:id`
-  - **Corpo da Requisição:** `{ "nivel": "Novo Nome do Nível" }`
+
+  - **Corpo da Requisição:**
+
+  ```json
+  {
+    "nivel": "Nome do Nível"
+  }
+  ```
+
   - **Resposta de Sucesso (200):** Retorna o nível editado.
   - **Resposta de Erro (400):** Retorna se o corpo da requisição estiver incorreto.
 
@@ -41,38 +100,59 @@ Certifique-se de ter as versões adequadas do Node.js e outras ferramentas neces
   - **Resposta de Sucesso (204):** Retorna se o nível foi removido com sucesso.
   - **Resposta de Erro (400):** Retorna se houver desenvolvedores associados ao nível.
 
+### **Desenvolvedores**
+
 - **Listar Desenvolvedores (GET):** `/api/desenvolvedores`
+
   - **Resposta de Sucesso (200):** Retorna a lista de desenvolvedores existentes.
+
+  ```json
+  {
+    "id": 1,
+    "nome": "Nome do Desenvolvedor",
+    "sexo": "M",
+    "data_nascimento": "1990-01-01",
+    "idade": 31,
+    "hobby": "Programação",
+    "nivel": {
+      "id": 1,
+      "nivel": "Nome do Nível"
+    }
+  }
+  ```
+
   - **Resposta de Erro (404):** Retorna se não houver nenhum desenvolvedor cadastrado.
 
 - **Cadastrar Desenvolvedor (POST):** `/api/desenvolvedores`
+
   - **Corpo da Requisição:**
 
   ```json
   {
-      "nivelId": 1,
-      "nome": "Nome do Desenvolvedor",
-      "sexo": "M",
-      "datanascimento": "1990-01-01",
-      "hobby": "Programação"
+    "nivel_id": 1,
+    "nome": "Nome do Desenvolvedor",
+    "sexo": "M",
+    "data_nascimento": "1990-01-01",
+    "hobby": "Programação"
   }
-   ```
+  ```
 
   - **Resposta de Sucesso (201):** Retorna o novo desenvolvedor criado.
   - **Resposta de Erro (400):** Retorna se o corpo da requisição estiver incorreto.
 
 - **Editar Desenvolvedor (PUT/PATCH):** `/api/desenvolvedores/:id`
+
   - **Corpo da Requisição:**
 
-   ```json
-   {
-      "nome": "Novo Nome do Desenvolvedor",
-      "hobby": "Violão",
-      "nivelId": 2,
-      "sexo": "F",
-      "datanascimento": "1990-01-01"
+  ```json
+  {
+    "nome": "Novo Nome do Desenvolvedor",
+    "hobby": "Violão",
+    "nivel_id": 2,
+    "sexo": "F",
+    "data_nascimento": "1990-01-01"
   }
-   ```
+  ```
 
   - **Resposta de Sucesso (200):** Retorna o desenvolvedor editado.
   - **Resposta de Erro (400):** Retorna se o corpo da requisição estiver incorreto.
@@ -81,40 +161,40 @@ Certifique-se de ter as versões adequadas do Node.js e outras ferramentas neces
   - **Resposta de Sucesso (204):** Retorna se o desenvolvedor foi removido com sucesso.
   - **Resposta de Erro (400):** Retorna se houver problemas na remoção.
 
-## Sugestões de Desenvolvimento
+#### Observações
 
-### Estrutura da base de desenvolvedores
+Caso faça paginação, retornar o seguinte formato de resposta:
 
-```plaintext
-id: integer
-nivel: fk
-nome: varchar
-sexo: char
-datanascimento: date
-idade: integer
-hobby: varchar
+```json
+{
+  "data": [], // Array de desenvolvedores ou níveis
+  "meta": {
+    "total": 10,
+    "per_page": 10,
+    "current_page": 1,
+    "last_page": 1
+  }
+}
 ```
 
-## Estrutura da base de níveis
+# **Frontend** 🎨
 
-```plaintext
-id: integer
-nivel: varchar
-```
+Crie uma SPA (Single Page Application) com uma interface intuitiva, aplicando técnicas de UI/UX.
 
-### Orquestração de Projetos
+Deverá ter pelo menos 2 páginas:
 
-- Disponibilização do backend via Docker 🐳
-- Disponibilização do frontend via Docker 🎨 🐳
-- Disponibilização dos containers (backend + frontend) via Docker Compose 🐳
-- Disponibilização/Publicação do sistema online 🌐
+- Níveis
+- Desenvolvedores
 
-## Opcionais 📝
+Para cada página:
 
-- Utilize tipagem de dados apropriada para garantir consistência nos dados.
-- Mantenha um código limpo e bem estruturado, seguindo os princípios de Clean Code e Clean Architecture.
-- Adicione testes unitários para partes críticas do código.
-- Considere adicionar capturas de tela ou GIFs animados para demonstrar visualmente a interface do usuário.
+- Listagem
+  - Tabela com os itens cadastrados
+  - Deve ter as opções de adicionar, editar e remover
+- Cadastro / Edição
+  - Pode ser uma modal ou uma página a parte também
+- Exclusão
+  - Deve ter uma confirmação antes de excluir
 
 ## O que será avaliado? 🔎
 
@@ -128,8 +208,99 @@ Os mais importante aqui são:
 - Como você resolveu os problemas
 - Sua forma de escrever o código
 
+## Dicas
+
+- **Não se preocupe em fazer tudo de uma vez!**
+  - Faça um passo de cada vez, resolvendo um problema de cada vez.
+- **Em caso de dúvidas, pergunte!**
+  - Estamos aqui para ajudar, caso fique com dúvida em alguns dos requisitos.
+- **Utilize o que quiser**.
+  - Seja frameworks, bibliotecas, banco de dados, etc...
+- **Foque no que foi pedido**.
+  - Não gaste tempo com funcionalidades que não foram solicitadas.
+- **Cheque tudo!**
+  - Certifique-se de que tudo está funcionando corretamente.
+  - Antes de enviar, verifique se o projeto está funcionando corretamente.
+    - Instale tudo do zero e teste novamente.
+- **Não se esqueça de documentar o seu projeto!**
+  - Explique como rodar o projeto, como testar, como foi a sua abordagem, etc...
+  - Caso não utilize Docker, deixe as instruções de instalação e execução no **README.md**:
+    - Versões utilizadas, scripts de banco dedos, passo a passo, etc...
+
 ## Entrega 📄
 
 Faça seu teste com calma! Organize-se! E após finalizado envie-nos por e-mail o link do projeto no github, com as devidas explicações no **README.md** do seu projeto.
 
 Desejamos uma boa sorte e agradecemos o interesse em participar de nosso processo de obtenção de talentos!
+
+## Checklist 📝
+
+Abaixo está todos os itens que iremos avaliar no seu projeto.
+<br>
+Quanto mais itens você conseguir entregar, melhor será a sua avaliação.
+<br>
+Este checklist é apenas um guia para te ajudar e não precisa ser seguido à risca.
+Faça os itens que conseguir.
+<br>
+Está separado por níveis, onde o nível 1 é o mínimo que esperamos que você entregue.
+
+---
+
+**Legenda de Símbolos:**
+
+- 🚀 -> Backend
+- 🎨 -> Frontend
+
+> **⚠️ Obs:** Quando tiver ambos os simbolos, deve-se fazer a feature no frontend e backend.
+
+---
+
+### Nível 1
+
+|     | Descrição                  | Local |
+| --- | -------------------------- | ----- |
+| [ ] | Listar niveis              | 🚀🎨  |
+| [ ] | Cadastrar um nível         | 🚀🎨  |
+| [ ] | Editar um nível            | 🚀🎨  |
+| [ ] | Remover um nível           | 🚀🎨  |
+| [ ] | Listar desenvolvedores     | 🚀🎨  |
+| [ ] | Cadastrar um desenvolvedor | 🚀🎨  |
+| [ ] | Editar um desenvolvedor    | 🚀🎨  |
+| [ ] | Remover um desenvolvedor   | 🚀🎨  |
+
+### Nível 2
+
+|     | Descrição                                                              | Local |
+| --- | ---------------------------------------------------------------------- | ----- |
+| [ ] | Impedir remoção de nível com desenvolvedores associados                | 🚀    |
+| [ ] | Adicionar busca via query para a listagem de n íveis                   | 🚀🎨  |
+| [ ] | Adicionar busca via query para a listagem de desenvolvedores           | 🚀🎨  |
+| [ ] | Tratamento de Exceções / Retornos erros concisos                       | 🚀🎨  |
+| [ ] | Paginação na listagem de níveis                                        | 🚀🎨  |
+| [ ] | Paginação na listagem de desenvolvedores                               | 🚀🎨  |
+| [ ] | Mensagens de sucesso e/ou erros (Ex. Toast Notification)               | 🎨    |
+| [ ] | Confirmação para exclusão de itens                                     | 🎨    |
+| [ ] | Ordenação das tabelas clicando no nome da coluna                       | 🎨    |
+| [ ] | Validações de campos                                                   | 🚀🎨  |
+| [ ] | Na página de níveis adicionar uma coluna com a qtde de devs associados | 🎨    |
+
+### Nível 3
+
+|     | Descrição                              | Local |
+| --- | -------------------------------------- | ----- |
+| [ ] | Tipagem de dados                       | 🚀🎨  |
+| [ ] | Organização e estrutura de pastas      | 🚀🎨  |
+| [ ] | Reaproveitamento de código             | 🚀🎨  |
+| [ ] | Clean Code                             | 🚀🎨  |
+| [ ] | Arquitetura: Clean, Onion, Hexagonal   | 🚀🎨  |
+| [ ] | Testes unitários / Feature             | 🚀🎨  |
+| [ ] | Documentação código/endpoint (swagger) | 🚀🎨  |
+
+### Nível 4
+
+|     | Descrição                                                               | Local |
+| --- | ----------------------------------------------------------------------- | ----- |
+| [ ] | Disponibilização do backend via Docker                                  | 🚀    |
+| [ ] | Disponibilização do frontend via Docker                                 | 🎨    |
+| [ ] | Disponibilização dos containers (backend + frontend) via Docker Compose | 🚀🎨  |
+| [ ] | Publicação do projeto online                                            | 🚀🎨  |
