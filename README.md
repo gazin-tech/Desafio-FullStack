@@ -34,7 +34,6 @@ nivel_id: fk (niveis)
 nome: varchar
 sexo: char
 data_nascimento: date
-idade: integer
 hobby: varchar
 ```
 
