@@ -18,7 +18,7 @@ Sugerimos a seguinte estrutura de pasta inicial para o projeto:
 ### **Legenda:**
 
 - 📂**sua-pasta**: Pasta raiz do projeto.
-- 📂**backend**: Contém o código relacionado ao servidor e à API RESTful.
+- 📂**backend**: Contém o código relacionado ao servidor (API RESTful).
 - 📂**frontend**: Contém o código da interface do usuário.
 - 🐳**docker-compose.yml**: Arquivo de configuração do Docker Compose para orquestração dos containers.
 
